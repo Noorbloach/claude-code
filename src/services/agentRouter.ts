@@ -1,6 +1,14 @@
 import { Message, ModelInfo } from '../types';
 
-const BASE_URL = '/api/agentrouter';
+const getBaseUrl = () => {
+  if (typeof window !== 'undefined') {
+    // Client-side: use the configured public environment variable
+    return process.env.NEXT_PUBLIC_API_URL || '/api/agentrouter';
+  }
+  return process.env.NEXT_PUBLIC_API_URL || '/api/agentrouter';
+};
+
+const BASE_URL = getBaseUrl();
 
 export class AgentRouterError extends Error {
   status?: number;
