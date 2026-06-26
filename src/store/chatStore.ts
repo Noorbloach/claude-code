@@ -360,7 +360,20 @@ export const useChatStore = create<ChatState>()(
     }),
     {
       name: 'agentrouter-chat-settings',
+      version: 2,
       storage: createJSONStorage(() => localStorage),
+      migrate: (persistedState: any, version: number) => {
+        // v1 → v2: clear old fake model names that don't exist on agentrouter.org
+        const FAKE_MODELS = ['glm-5.2', 'gpt-5.5', 'claude-opus-4-6', 'claude-opus-4-7', 'claude-opus-4-8'];
+        if (version < 2 && persistedState) {
+          if (FAKE_MODELS.includes(persistedState.selectedModel)) {
+            persistedState.selectedModel = 'gpt-4o';
+          }
+          // Also clear cached models list so it gets re-fetched from the API
+          persistedState.models = [];
+        }
+        return persistedState;
+      },
       // List the states we want to persist (exclude transient states)
       partialize: (state) => ({
         apiKey: state.apiKey,
