@@ -45,11 +45,11 @@ export async function validateApiKey(apiKey: string): Promise<boolean> {
 export async function fetchModels(apiKey: string): Promise<ModelInfo[]> {
   if (apiKey === 'sk-dummy' || apiKey === 'dummy') {
     return [
-      { id: 'claude-opus-4-6', owned_by: 'anthropic' },
-      { id: 'claude-opus-4-7', owned_by: 'anthropic' },
-      { id: 'claude-opus-4-8', owned_by: 'anthropic' },
-      { id: 'glm-5.2', owned_by: 'google' },
-      { id: 'gpt-5.5', owned_by: 'openai' },
+      { id: 'claude-opus-4-6', owned_by: 'anthropic', object: 'model' },
+      { id: 'claude-opus-4-7', owned_by: 'anthropic', object: 'model' },
+      { id: 'claude-opus-4-8', owned_by: 'anthropic', object: 'model' },
+      { id: 'glm-5.2', owned_by: 'google', object: 'model' },
+      { id: 'gpt-5.5', owned_by: 'openai', object: 'model' },
     ];
   }
   try {
