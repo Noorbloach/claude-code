@@ -18,10 +18,17 @@ export async function GET(req: NextRequest) {
 
     if (!response.ok) {
       const errText = await response.text();
-      return new Response(errText, { 
-        status: response.status,
-        headers: { 'Content-Type': 'application/json' }
-      });
+      let errJson: any = null;
+      try {
+        errJson = JSON.parse(errText);
+      } catch (e) {
+        // Not valid JSON (likely HTML error from Cloudflare or upstream server)
+        return NextResponse.json(
+          { error: { message: `Upstream error: ${errText.substring(0, 200)}...` } },
+          { status: response.status }
+        );
+      }
+      return NextResponse.json(errJson, { status: response.status });
     }
 
     const data = await response.json();

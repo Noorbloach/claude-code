@@ -6,12 +6,10 @@ export const dynamic = 'force-dynamic';
 
 function logToFile(data: any) {
   try {
-    const logPath = '/Users/poker/Claude Unlimited/image_gen_logs.txt';
     const timestamp = new Date().toISOString();
-    const logMessage = `[${timestamp}] ${JSON.stringify(data, null, 2)}\n\n`;
-    fs.appendFileSync(logPath, logMessage, 'utf-8');
+    console.log(`[${timestamp}] ${JSON.stringify(data, null, 2)}`);
   } catch (e) {
-    console.error('Failed to write log to file', e);
+    console.error('Failed to log message', e);
   }
 }
 

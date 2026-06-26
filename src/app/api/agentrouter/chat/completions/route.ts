@@ -21,7 +21,20 @@ export async function POST(req: NextRequest) {
 
     if (!response.ok) {
       const errText = await response.text();
-      return new Response(errText, { 
+      let errJson: any = null;
+      try {
+        errJson = JSON.parse(errText);
+      } catch (e) {
+        // Not valid JSON (likely HTML error from Cloudflare or upstream server)
+        return new Response(
+          JSON.stringify({ error: { message: `Upstream error: ${errText.substring(0, 200)}...` } }),
+          { 
+            status: response.status,
+            headers: { 'Content-Type': 'application/json' }
+          }
+        );
+      }
+      return new Response(JSON.stringify(errJson), { 
         status: response.status,
         headers: { 'Content-Type': 'application/json' }
       });
