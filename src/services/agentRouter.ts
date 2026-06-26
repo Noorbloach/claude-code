@@ -10,6 +10,14 @@ const getBaseUrl = () => {
 
 const BASE_URL = getBaseUrl();
 
+const getEndpoint = (path: string) => {
+  if (BASE_URL.includes('?')) {
+    // If BASE_URL already has query params (like proxy.php?path=), append path without leading slash
+    return `${BASE_URL}${path.replace(/^\//, '')}`;
+  }
+  return `${BASE_URL}${path.startsWith('/') ? path : '/' + path}`;
+};
+
 export class AgentRouterError extends Error {
   status?: number;
   constructor(message: string, status?: number) {
@@ -28,7 +36,7 @@ export async function validateApiKey(apiKey: string): Promise<boolean> {
   }
 
   try {
-    const response = await fetch(`${BASE_URL}/models`, {
+    const response = await fetch(getEndpoint('/models'), {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
@@ -61,7 +69,7 @@ export async function fetchModels(apiKey: string): Promise<ModelInfo[]> {
     ];
   }
   try {
-    const response = await fetch(`${BASE_URL}/models`, {
+    const response = await fetch(getEndpoint('/models'), {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
@@ -121,7 +129,7 @@ export async function streamChatCompletion(
       });
     });
 
-    const response = await fetch(`${BASE_URL}/chat/completions`, {
+    const response = await fetch(getEndpoint('/chat/completions'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -245,7 +253,7 @@ export async function generateImage(
   quality: 'standard' | 'hd' = 'standard',
   style: 'vivid' | 'natural' = 'vivid',
 ): Promise<{ url: string; revisedPrompt?: string }> {
-  const response = await fetch('/api/agentrouter/images/generations', {
+  const response = await fetch(getEndpoint('/images/generations'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
