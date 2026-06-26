@@ -72,10 +72,10 @@ export default function ChatArea() {
       const list = await fetchModels(key);
       setModels(list);
     } catch (err: any) {
-      setError(`Failed to load models list: ${err.message || 'Unknown error'}. Please check if your Vercel environment variables and Hostinger proxy are set up correctly.`);
+      setError(`Failed to load models: ${err.message || 'Unknown error'}`);
     }
     finally { setIsLoadingModels(false); }
-  }, [setIsLoadingModels, setModels]);
+  }, [setIsLoadingModels, setModels, setError]);
 
   useEffect(() => {
     if (apiKey && isValidated) {
