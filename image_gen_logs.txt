@@ -1,0 +1,54 @@
+[2026-06-25T00:42:06.248Z] {
+  "action": "request_started",
+  "body": {
+    "model": "dall-e-3",
+    "prompt": "a cute cat",
+    "n": 1,
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": "vivid",
+    "response_format": "url"
+  },
+  "hasAuth": true
+}
+
+[2026-06-25T00:42:07.106Z] {
+  "action": "request_failed",
+  "status": 400,
+  "errText": "{\"error\":{\"code\":\"content-blocked\",\"message\":\"content-blocked (request id: 20260625084207595925834d7vwryGI)\",\"param\":\"\",\"type\":\"agent_router_api_error\"}}",
+  "errJson": {
+    "error": {
+      "code": "content-blocked",
+      "message": "content-blocked (request id: 20260625084207595925834d7vwryGI)",
+      "param": "",
+      "type": "agent_router_api_error"
+    }
+  }
+}
+
+[2026-06-25T00:42:59.732Z] {
+  "action": "request_started",
+  "body": {
+    "model": "dall-e-3",
+    "prompt": "A cute fluffy kitten sitting in a sunlit window, big sparkling eyes, soft pastel colors, cozy home background, warm natural lighting, highly detailed fur, adorable expression, whimsical and heartwarming style",
+    "n": 1,
+    "size": "1024x1024",
+    "quality": "standard",
+    "style": "vivid",
+    "response_format": "url"
+  },
+  "hasAuth": true
+}
+
+[2026-06-25T00:43:00.057Z] {
+  "action": "request_failed",
+  "status": 503,
+  "errText": "{\"error\":{\"message\":\"当前分组 default 下对于模型 dall-e-3 无可用渠道 (request id: 20260625084300544256679Xpz5PaW3)\",\"type\":\"new_api_error\"}}",
+  "errJson": {
+    "error": {
+      "message": "当前分组 default 下对于模型 dall-e-3 无可用渠道 (request id: 20260625084300544256679Xpz5PaW3)",
+      "type": "new_api_error"
+    }
+  }
+}
+
