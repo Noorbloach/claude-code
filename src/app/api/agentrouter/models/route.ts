@@ -31,6 +31,15 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(errJson, { status: response.status });
     }
 
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
+      const text = await response.text();
+      return NextResponse.json(
+        { error: { message: `Upstream returned non-JSON response (${contentType || 'empty'}). Content: ${text.substring(0, 200)}...` } },
+        { status: 502 }
+      );
+    }
+
     const data = await response.json();
     return NextResponse.json(data);
   } catch (error: any) {

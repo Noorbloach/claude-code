@@ -40,6 +40,18 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    const contentType = response.headers.get('content-type') || '';
+    if (contentType.includes('text/html')) {
+      const text = await response.text();
+      return new Response(
+        JSON.stringify({ error: { message: `Upstream returned HTML instead of event stream. Content: ${text.substring(0, 200)}...` } }),
+        { 
+          status: 502,
+          headers: { 'Content-Type': 'application/json' }
+        }
+      );
+    }
+
     // Return the readable stream directly back to the client
     return new Response(response.body, {
       status: 200,
