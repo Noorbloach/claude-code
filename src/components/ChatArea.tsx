@@ -76,10 +76,10 @@ export default function ChatArea() {
   }, [setIsLoadingModels, setModels]);
 
   useEffect(() => {
-    if (apiKey && isValidated && models.length === 0) {
+    if (apiKey && isValidated) {
       loadModels(apiKey);
     }
-  }, [apiKey, isValidated, models.length, loadModels]);
+  }, [apiKey, isValidated, loadModels]);
 
   // Theme sync
   useEffect(() => {
