@@ -61,11 +61,16 @@ export async function validateApiKey(apiKey: string): Promise<boolean> {
 export async function fetchModels(apiKey: string): Promise<ModelInfo[]> {
   if (apiKey === 'sk-dummy' || apiKey === 'dummy') {
     return [
-      { id: 'claude-opus-4-6', owned_by: 'anthropic', object: 'model' },
-      { id: 'claude-opus-4-7', owned_by: 'anthropic', object: 'model' },
-      { id: 'claude-opus-4-8', owned_by: 'anthropic', object: 'model' },
-      { id: 'glm-5.2', owned_by: 'google', object: 'model' },
-      { id: 'gpt-5.5', owned_by: 'openai', object: 'model' },
+      { id: 'claude-3-5-sonnet-20241022', owned_by: 'anthropic', object: 'model' },
+      { id: 'claude-3-5-haiku-20241022', owned_by: 'anthropic', object: 'model' },
+      { id: 'claude-3-opus-20240229', owned_by: 'anthropic', object: 'model' },
+      { id: 'gpt-4o', owned_by: 'openai', object: 'model' },
+      { id: 'gpt-4o-mini', owned_by: 'openai', object: 'model' },
+      { id: 'gpt-4-turbo', owned_by: 'openai', object: 'model' },
+      { id: 'deepseek-chat', owned_by: 'deepseek', object: 'model' },
+      { id: 'deepseek-coder', owned_by: 'deepseek', object: 'model' },
+      { id: 'gemini-1.5-pro', owned_by: 'google', object: 'model' },
+      { id: 'gemini-1.5-flash', owned_by: 'google', object: 'model' },
     ];
   }
   try {
