@@ -10,9 +10,6 @@ export async function GET(req: NextRequest) {
       method: 'GET',
       headers: {
         'Authorization': authHeader,
-        'Originator': 'codex_cli_rs',
-        'User-Agent': 'codex_cli_rs/0.101.0 (Mac OS 26.0.1; arm64) Apple_Terminal/464',
-        'Version': '0.101.0',
       },
     });
 

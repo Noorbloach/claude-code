@@ -144,9 +144,6 @@ export async function streamChatCompletion(
         model,
         messages: formattedMessages,
         stream: true,
-        stream_options: {
-          include_usage: true, // returns usage stats in the second to last chunk in OpenAI spec
-        },
       }),
       signal,
     });
