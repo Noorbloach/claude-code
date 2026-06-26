@@ -359,7 +359,7 @@ export const useChatStore = create<ChatState>()(
       },
     }),
     {
-      name: 'agentrouter-chat-settings',
+      name: 'claude-unlimited-v2',
       version: 2,
       storage: createJSONStorage(() => localStorage),
       migrate: (persistedState: any, version: number) => {
